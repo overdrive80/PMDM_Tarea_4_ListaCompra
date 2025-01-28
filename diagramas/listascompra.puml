@@ -1,0 +1,672 @@
+@startuml
+class edu.pmdm.listascompra.gestores.GestorPermisos {
+- Context context
+- Activity activity
+- Fragment fragment
+- PermisosCallback callback
+- ActivityResultLauncher<String[]> permisosLauncher
+- void setupLauncher()
++ void comprobarResultadosPermisos(String[],PermisosCallback)
+- void manejarResultadosPermisos(Map<String,Boolean>)
+- String[] getPermisosDenegados(String[])
+}
+
+
+interface edu.pmdm.listascompra.gestores.GestorPermisos$PermisosCallback {
+~ void onPermisosConcedidos()
+~ void onPermisosDenegados(String[])
+}
+
+class edu.pmdm.listascompra.basedatos.ContratoCompra {
++ {static} String NOMBRE_BBDD
++ {static} int VERSION_BBDD
+}
+
+class edu.pmdm.listascompra.basedatos.ContratoCompra$Productos {
++ {static} String NOMBRE_TABLA
++ {static} String NOMBRE_PRODUCTO
++ {static} String DESCRIPCION_PRODUCTO
++ {static} String IMAGEN_PRODUCTO
++ {static} String PRECIO_PRODUCTO
++ {static} String VECES_COMPRADO
++ {static} String CREAR_TABLA
++ {static} String BORRAR_TABLA
+}
+
+class edu.pmdm.listascompra.basedatos.ContratoCompra$ListasCompra {
++ {static} String NOMBRE_TABLA
++ {static} String NOMBRE_LISTA
++ {static} String FECHA_LISTA
++ {static} String CREAR_TABLA
++ {static} String BORRAR_TABLA
+}
+
+class edu.pmdm.listascompra.basedatos.ContratoCompra$DetalleLista {
++ {static} String NOMBRE_TABLA
++ {static} String ID_LISTA
++ {static} String ID_PRODUCTO
++ {static} String CANTIDAD
++ {static} String UNIDAD
++ {static} String CREAR_TABLA
++ {static} String BORRAR_TABLA
+}
+
+class edu.pmdm.listascompra.ui.nueva_lista.NuevaListaFragment {
+- FragmentNuevaListaBinding binding
+- EditText etNombreLista
+- Button btnCrearLista
+- NuevaListaViewModel viewModel
+- RepoListasCompras repo
+- String nombreLista
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
+- void comprobarNombreLista(Callback<Boolean>)
+- void crearLista(View)
++ void onStop()
++ void onDestroyView()
+}
+
+
+interface edu.pmdm.listascompra.ui.nueva_lista.NuevaListaFragment$Callback {
+~ void onResult(T)
+}
+
+class edu.pmdm.listascompra.ui.compartir_lista.CompartirListaFragment {
+- FragmentCompartirListaBinding binding
+- RepoListasCompras repo
+- List<Contacto> listaContactos
+- RecyclerView rvContactos
+- {static} String[] PERMISOS_COMPARTIR
++ {static} String ID_CONTACTO
++ {static} String NOMBRE_CONTACTO
++ {static} String TELEFONO_CONTACTO
+- boolean modoDegradadoCompartir
+- ActivityResultLauncher<String[]> permisosLauncher
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
++ void onDestroyView()
+- void solicitarPermisos()
+- void obtenerContactos()
+}
+
+
+class edu.pmdm.listascompra.modelo.Contacto {
+- int id
+- String nombre
+- String telefono
++ int getId()
++ void setId(int)
++ String getNombre()
++ void setNombre(String)
++ String getTelefono()
++ void setTelefono(String)
++ String toString()
+}
+
+
+class edu.pmdm.listascompra.basedatos.ConexionBBDD {
+- Context contexto
+- {static} ConexionBBDD conexion
++ {static} ConexionBBDD getInstance(Context)
++ void onCreate(SQLiteDatabase)
++ void onUpgrade(SQLiteDatabase,int,int)
++ void borrarTablas()
++ void eliminarBaseDeDatos()
+}
+
+
+class edu.pmdm.listascompra.ui.crear_producto.CrearProductoViewModel {
+}
+class edu.pmdm.listascompra.gestores.GestorNumeros {
++ {static} int stringAInt(String)
++ {static} long stringALong(String)
++ {static} double stringADouble(String)
++ {static} String intAString(int)
++ {static} String longAString(long)
++ {static} String doubleAString(double)
++ {static} void main(String[])
+}
+
+class edu.pmdm.listascompra.basedatos.RepoListasCompras {
+- ConexionBBDD conexion
+- Context contexto
+- {static} String TAG
++ long insertarProducto(Producto)
++ boolean hayProductos()
++ Producto getProducto(int)
++ List<Producto> getProductos()
++ void incrementarVeces(long)
++ void decrementarVeces(long)
++ boolean existeProductoNombre(String)
++ long insertarLista(String)
++ boolean existeNombreLista(String)
++ int cambiarNombreLista(int,String)
++ List<ListaCompra> getListas()
++ int eliminarLista(int)
++ long insertarDetalleLista(long,long,Double,String)
++ List<ItemLista> getDetalleLista(int)
++ void eliminarDetalleLista(int,int)
++ void modificarDetalleLista(int,int,Double,String)
+}
+
+
+class edu.pmdm.listascompra.gestores.GestorFechas {
++ {static} String PATRON_UTC
++ {static} java.util.Date toDate(java.sql.Date)
++ {static} java.sql.Date toSQLDate(java.util.Date)
++ {static} String toString(java.util.Date,String)
++ {static} java.util.Date toDate(String,String)
++ {static} String toLocalTimeString(java.util.Date,String)
++ {static} java.util.Date toLocalfromUTC(String)
+}
+
+
+class edu.pmdm.listascompra.recycler_views.ContactosAdapter {
+- List<Contacto> listaContactos
+- Context contexto
+- onContactoLongClickListener listener
++ ContactosViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(ContactosViewHolder,int)
++ int getItemCount()
++ void setOnLongClickListener(onContactoLongClickListener)
+}
+
+
+interface edu.pmdm.listascompra.recycler_views.ContactosAdapter$onContactoLongClickListener {
+~ void onContactoLongClick(int,Contacto)
+}
+
+class edu.pmdm.listascompra.dialogos.DialogoFecha {
+~ OnFechaSeleccionada listener
++ Dialog onCreateDialog(Bundle)
++ void onDateSet(DatePicker,int,int,int)
++ void setOnFechaSeleccionada(OnFechaSeleccionada)
+}
+
+
+interface edu.pmdm.listascompra.dialogos.DialogoFecha$OnFechaSeleccionada {
++ void onResultadoFecha(GregorianCalendar)
+}
+
+class edu.pmdm.listascompra.ui.nueva_lista.NuevaListaActivity {
+- String nombreLista
+- RecyclerView rvListaCompra
+- List<Producto> productos
+- List<ItemLista> listaCompra
+- List<ItemLista> listaOriginal
+- Set<Integer> productosSeleccionados
+- RepoListasCompras repo
+- FloatingActionButton fab
+- ListaCompraAdapter listaCompraAdapter
+- ActivityNuevaListaBinding binding
+- boolean modoEdicion
+- int idLista
+- OnBackPressedCallback onBackPressedCallback
+# void onCreate(Bundle)
+- void cargarProductos()
+- void cargarDetallesLista(int)
+- void mostrarDialogoProductos()
++ boolean onOptionsItemSelected(MenuItem)
+- void guardarYsalir()
+- void modificarLista()
+- void guardarLista()
++ void mostrarDialogCantidad(ItemLista,int)
+}
+
+
+class edu.pmdm.listascompra.datosexternos.DescargadorProductos {
+- {static} String JSON_URL
+- {static} String IMAGE_URL_BASE
++ List<Producto> getProductos()
+- {static} JSONArray getJsonArray(StringBuilder)
+- byte[] getImagenes(String)
+}
+
+
+class edu.pmdm.listascompra.MainActivity {
+- AppBarConfiguration mAppBarConfiguration
+- MainActivityBinding binding
+- ConexionBBDD conexion
+- RepoListasCompras repo
+- NavController navController
+# void onCreate(Bundle)
+# void onStart()
+- void cargarProductos()
+- void configurarInterfaz()
++ boolean onSupportNavigateUp()
+}
+
+
+class edu.pmdm.listascompra.ui.crear_producto.CrearProductoFragment {
+- CrearProductoViewModel viewModel
+- FragmentCrearProductoBinding binding
+- Bitmap imagenSeleccionada
+- ActivityResultLauncher<Intent> eleccionImagen
+- RepoListasCompras repo
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
+- void guardarProducto(View)
+- void seleccionarImagen()
+- void resetearCampos()
++ void onDestroyView()
+}
+
+
+class edu.pmdm.listascompra.notificaciones.SmsBroadcastReceiver {
++ {static} String TELEFONO
++ {static} String MENSAJE
++ void onReceive(Context,Intent)
+}
+
+
+class edu.pmdm.listascompra.gestores.Info {
++ {static} void mostrarNombre(Context,View)
+}
+
+class edu.pmdm.listascompra.recycler_views.ProductosAdapter {
+- List<Producto> productos
+- Set<Integer> productosSeleccionados
+- OnProductoSeleccionadoListener listener
++ ProductosViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(ProductosViewHolder,int)
++ int getItemCount()
++ void setProductos(List<Producto>)
+}
+
+
+interface edu.pmdm.listascompra.recycler_views.ProductosAdapter$OnProductoSeleccionadoListener {
+~ void onProductoSeleccionado(Producto,boolean)
+}
+
+class edu.pmdm.listascompra.gestores.GestorImagenes {
+- {static} String TAG
++ {static} Bitmap obtenerImagenDesdeUri(Context,Uri)
++ {static} byte[] convertBitmapToBytes(Bitmap)
+}
+
+
+class edu.pmdm.listascompra.ui.consultar_listas.ConsultarListasViewModel {
+- MutableLiveData<List<ListaCompra>> listasCompra
++ void setListasCompra(List<ListaCompra>)
++ LiveData<List<ListaCompra>> getListasCompra()
+}
+
+
+class edu.pmdm.listascompra.dialogos.DialogoHora {
+~ OnHoraSeleccionada listener
++ Dialog onCreateDialog(Bundle)
++ void onTimeSet(TimePicker,int,int)
++ void setOnHoraSeleccionada(OnHoraSeleccionada)
+}
+
+
+interface edu.pmdm.listascompra.dialogos.DialogoHora$OnHoraSeleccionada {
++ void onResultadoHora(GregorianCalendar)
+}
+
+class edu.pmdm.listascompra.modelo.ListaCompra {
+- int id
+- String nombre
+- Date fecha
+- List<ItemLista> items
+- String patronEntrada
+- String patronSalida
++ int getId()
++ void setId(int)
++ String getNombre()
++ void setNombre(String)
++ Date getFecha()
++ void setFecha(Date)
++ String getFechaString(String)
++ List<ItemLista> getItems()
++ void setItems(List<ItemLista>)
++ String toString()
+}
+
+
+class edu.pmdm.listascompra.recycler_views.ListaCompraViewHolder {
+- TextView tvNombre
+- TextView tvDescripcion
+- TextView tvPrecio
+- ImageView ivImagen
+- TextView tvCantidad
+- TextView tvUnidad
+- Context contexto
+- ListaCompraAdapter.onItemListaClickListener listener
++ void bind(ItemLista)
++ void onClick(View)
+}
+
+
+class edu.pmdm.listascompra.dialogos.DialogFragmentProductos {
+- List<Producto> productos
+- Set<Integer> productosSeleccionados
+- ProductosAdapter.OnProductoSeleccionadoListener listener
++ Dialog onCreateDialog(Bundle)
++ void setOnProductoSeleccionadoListener(ProductosAdapter.OnProductoSeleccionadoListener)
+}
+
+
+class edu.pmdm.listascompra.recycler_views.ListaCompraAdapter {
+- List<ItemLista> listaCompra
+- Context contexto
+- onItemListaClickListener listener
++ ListaCompraViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(ListaCompraViewHolder,int)
++ int getItemCount()
+}
+
+
+interface edu.pmdm.listascompra.recycler_views.ListaCompraAdapter$onItemListaClickListener {
+~ void onItemListaClick(int)
+}
+
+class edu.pmdm.listascompra.ui.compartir_lista.CompartirListaViewModel {
+- MutableLiveData<List<ListaCompra>> listasCompra
++ void setListasCompra(List<ListaCompra>)
++ LiveData<List<ListaCompra>> getListasCompra()
+}
+
+
+class edu.pmdm.listascompra.modelo.Producto {
+- int id
+- String nombre
+- String descripcion
+- String nombreImagen
+- double precio
+- byte[] imagenBlob
+- int vecesComprado
++ int getVecesComprado()
++ void setVecesComprado(int)
++ int getId()
++ void setId(int)
++ String getNombre()
++ void setNombre(String)
++ String getDescripcion()
++ void setDescripcion(String)
++ String getNombreImagen()
++ void setNombreImagen(String)
++ double getPrecio()
++ void setPrecio(double)
++ byte[] getImagenBlob()
++ void setImagenBlob(byte[])
++ String toString()
+}
+
+
+class edu.pmdm.listascompra.recycler_views.CompartirListaAdapter {
+- Context contexto
+- List<ListaCompra> listas
+- OnClickItemListener listener
++ CompartirListasViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(CompartirListasViewHolder,int)
++ int getItemCount()
++ void setOnItemClickListener(OnClickItemListener)
+}
+
+
+interface edu.pmdm.listascompra.recycler_views.CompartirListaAdapter$OnClickItemListener {
+~ void onItemClick(int,ListaCompra)
+}
+
+class edu.pmdm.listascompra.ui.consultar_listas.ConsultarListasFragment {
+- FragmentConsultarListasBinding binding
+- RecyclerView rvListasCompra
+- RepoListasCompras repo
+- List<ListaCompra> listas
+- TodasListasAdapter adapter
+- ConsultarListasViewModel viewModel
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
+- TodasListasViewHolder.OnCambiarNombreListener getImplOnCambiarNombreListener()
++ void onDestroyView()
+}
+
+
+class edu.pmdm.listascompra.basedatos.ConsultarContactos {
+- Context contexto
+- {static} ContentResolver contentResolver
+- {static} List<Contacto> listaContactos
++ {static} List<Contacto> getListaContactos(Context)
++ {static} Contacto getContacto(Context,int)
+}
+
+
+class edu.pmdm.listascompra.recycler_views.ProductosViewHolder {
+- TextView tvNombre
+- CheckBox chkProducto
++ void bind(Producto,Boolean,ProductosAdapter.OnProductoSeleccionadoListener)
+}
+
+
+class edu.pmdm.listascompra.modelo.ItemLista {
+- Producto producto
+- Double cantidad
+- String unidad
++ Producto getProducto()
++ Double getCantidad()
++ void setCantidad(Double)
++ void setProducto(Producto)
++ String getUnidad()
++ void setUnidad(String)
++ boolean haSidoModificado(ItemLista)
++ String toString()
+}
+
+
+class edu.pmdm.listascompra.notificaciones.Notificacion {
++ {static} int NOTIFICATION_ID
++ {static} int PERMISSION_REQUEST_CODE
++ {static} void mostrarNotificacion(Context,String,String)
+}
+
+
+class edu.pmdm.listascompra.recycler_views.TodasListasViewHolder {
+- EditText etNombreLista
+- TextView tvFechaCreacion
+- ImageButton ibEditarNombre
+- ImageButton ibMenuOpciones
+- Context contexto
+- String nombreOriginal
+- ListaCompra listaCompraItem
+- OnCambiarNombreListener listenerNombreValido
+- OnMenuListasListener listenerMenu
++ void bind(ListaCompra)
+- void restaurarNombre()
++ View.OnClickListener getImplOnClickListener()
+- View.OnFocusChangeListener getImplOnFocusChangeListener()
++ void setOnCambiarNombreListener(OnCambiarNombreListener)
++ void setOnMenuListasListener(OnMenuListasListener)
+}
+
+
+interface edu.pmdm.listascompra.recycler_views.TodasListasViewHolder$OnCambiarNombreListener {
+~ boolean esCambioCorrecto(int,String)
+}
+
+interface edu.pmdm.listascompra.recycler_views.TodasListasViewHolder$OnMenuListasListener {
+~ void onBotonEditar(int,int)
+~ void onBotonBorrar(int,int)
+}
+
+class edu.pmdm.listascompra.dialogos.DialogFragmentCantidad {
+- EditText etCantidad
+- ImageButton ibMenos
+- ChipGroup chipGroup
+- Chip cpLitros
+- View dialogView
+- ItemLista item
+- int posicion
+- onItemChangedListener listener
++ Dialog onCreateDialog(Bundle)
+- void setupReferencias()
+- void setupListeners()
+- void updateUnidad(Chip)
+- void disminuirCantidad()
+- void aumentarCantidad()
++ void onDismiss(DialogInterface)
+}
+
+
+interface edu.pmdm.listascompra.dialogos.DialogFragmentCantidad$onItemChangedListener {
++ void onItemChanged(ItemLista,int)
+}
+
+class edu.pmdm.listascompra.ui.compartir_lista.CompartirListaActivity {
+- RecyclerView rvListasCompra
+- List<ListaCompra> listas
+- RepoListasCompras repo
+- ActivityCompartirListaBinding binding
+- CompartirListaViewModel viewModel
+- ListaCompra listaSeleccionada
+- Contacto contactoSeleccionado
+# void onCreate(Bundle)
+- CompartirListaAdapter.OnClickItemListener getImplListenerClick()
+- void mostrarDialogExitoSMS(String)
+- void getContactoSeleccionado()
+- void getListaCompra()
+- void gestionarToolbar()
++ boolean onOptionsItemSelected(MenuItem)
+}
+
+
+class edu.pmdm.listascompra.recycler_views.ContactosViewHolder {
+- Context contexto
+- int idContacto
+- TextView tvNombreContacto
+- TextView tvTelefono
++ void bind(Contacto)
+}
+
+
+class edu.pmdm.listascompra.ui.nueva_lista.NuevaListaViewModel {
+- MutableLiveData<String> mText
++ LiveData<String> getText()
++ void setText(String)
+}
+
+
+class edu.pmdm.listascompra.recycler_views.CompartirListasViewHolder {
+- Context contexto
+- TextView tvNombreLista
+- TextView tvFechaCreacion
+- CompartirListaAdapter.OnClickItemListener listener
+- ListaCompra listaCompra
++ void bind(ListaCompra,CompartirListaAdapter.OnClickItemListener)
++ void setOnItemClickListener(CompartirListaAdapter.OnClickItemListener)
+}
+
+
+class edu.pmdm.listascompra.notificaciones.CanalNotificacionSMS {
++ {static} String CHANNEL_ID
++ {static} String CHANNEL_NAME
++ {static} void crearCanalNotificacion(Context)
+}
+
+
+class edu.pmdm.listascompra.dialogos.DialogFragmentEnviarSMS {
+- {static} String ARG_LISTA
+- ListaCompra lista
+- Contacto contacto
+- CheckBox chkProgramar
+- EditText etFechaSMS
+- Button btnEnviarSMS
+- ImageButton ibCalendar
+- OnSmsEnviadoListener listener
+- String mensajeSMS
+- Context contexto
+- GregorianCalendar fechaElegida
+- GregorianCalendar horaElegida
++ {static} DialogFragmentEnviarSMS newInstance(Contacto,ListaCompra)
++ Dialog onCreateDialog(Bundle)
+- void configurarVistas()
+- void programarEnvioSMS()
+- void enviarSMS(String)
+- String contruirMensaje()
++ Contacto getContacto()
++ void setContacto(Contacto)
++ ListaCompra getLista()
++ void setLista(ListaCompra)
+- void configurarCheckBoxProgramar()
+- void configurarBotonFecha()
+- void configurarBotonHora()
+- void configurarBotonEnviar()
+- DialogoHora.OnHoraSeleccionada getImplListenerHora()
+- DialogoFecha.OnFechaSeleccionada getImplListenerFecha()
++ void setOnSmsEnviadoListener(OnSmsEnviadoListener)
+}
+
+
+interface edu.pmdm.listascompra.dialogos.DialogFragmentEnviarSMS$OnSmsEnviadoListener {
+~ void onSmsEnviadoExito(String)
+~ void onSmsErrorEnvio(String)
+~ void onSmsProgramadoExito(String)
+~ void onSmsErrorProgramado(String)
+}
+
+class edu.pmdm.listascompra.recycler_views.TodasListasAdapter {
+- List<ListaCompra> listas
+- Context contexto
+- TodasListasViewHolder.OnCambiarNombreListener listenerNombreValido
+- TodasListasViewHolder.OnMenuListasListener listenerMenu
++ TodasListasViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(TodasListasViewHolder,int)
++ int getItemCount()
++ void setOnCambiarNombreListener(TodasListasViewHolder.OnCambiarNombreListener)
++ void setOnMenuListasListener(TodasListasViewHolder.OnMenuListasListener)
+}
+
+
+
+
+edu.pmdm.listascompra.gestores.GestorPermisos +.. edu.pmdm.listascompra.gestores.GestorPermisos$PermisosCallback
+edu.pmdm.listascompra.basedatos.ContratoCompra +.. edu.pmdm.listascompra.basedatos.ContratoCompra$Productos
+edu.pmdm.listascompra.basedatos.BaseColumns <|.. edu.pmdm.listascompra.basedatos.ContratoCompra$Productos
+edu.pmdm.listascompra.basedatos.ContratoCompra +.. edu.pmdm.listascompra.basedatos.ContratoCompra$ListasCompra
+edu.pmdm.listascompra.basedatos.BaseColumns <|.. edu.pmdm.listascompra.basedatos.ContratoCompra$ListasCompra
+edu.pmdm.listascompra.basedatos.ContratoCompra +.. edu.pmdm.listascompra.basedatos.ContratoCompra$DetalleLista
+edu.pmdm.listascompra.basedatos.BaseColumns <|.. edu.pmdm.listascompra.basedatos.ContratoCompra$DetalleLista
+androidx.fragment.app.Fragment <|-- edu.pmdm.listascompra.ui.nueva_lista.NuevaListaFragment
+edu.pmdm.listascompra.ui.nueva_lista.NuevaListaFragment +.. edu.pmdm.listascompra.ui.nueva_lista.NuevaListaFragment$Callback
+androidx.fragment.app.Fragment <|-- edu.pmdm.listascompra.ui.compartir_lista.CompartirListaFragment
+android.database.sqlite.SQLiteOpenHelper <|-- edu.pmdm.listascompra.basedatos.ConexionBBDD
+androidx.lifecycle.ViewModel <|-- edu.pmdm.listascompra.ui.crear_producto.CrearProductoViewModel
+edu.pmdm.listascompra.recycler_views.Adapter <|-- edu.pmdm.listascompra.recycler_views.ContactosAdapter
+edu.pmdm.listascompra.recycler_views.ContactosAdapter +.. edu.pmdm.listascompra.recycler_views.ContactosAdapter$onContactoLongClickListener
+edu.pmdm.listascompra.dialogos.OnDateSetListener <|.. edu.pmdm.listascompra.dialogos.DialogoFecha
+androidx.fragment.app.DialogFragment <|-- edu.pmdm.listascompra.dialogos.DialogoFecha
+edu.pmdm.listascompra.dialogos.DialogoFecha +.. edu.pmdm.listascompra.dialogos.DialogoFecha$OnFechaSeleccionada
+androidx.appcompat.app.AppCompatActivity <|-- edu.pmdm.listascompra.ui.nueva_lista.NuevaListaActivity
+androidx.appcompat.app.AppCompatActivity <|-- edu.pmdm.listascompra.MainActivity
+androidx.fragment.app.Fragment <|-- edu.pmdm.listascompra.ui.crear_producto.CrearProductoFragment
+android.content.BroadcastReceiver <|-- edu.pmdm.listascompra.notificaciones.SmsBroadcastReceiver
+edu.pmdm.listascompra.recycler_views.Adapter <|-- edu.pmdm.listascompra.recycler_views.ProductosAdapter
+edu.pmdm.listascompra.recycler_views.ProductosAdapter +.. edu.pmdm.listascompra.recycler_views.ProductosAdapter$OnProductoSeleccionadoListener
+androidx.lifecycle.ViewModel <|-- edu.pmdm.listascompra.ui.consultar_listas.ConsultarListasViewModel
+edu.pmdm.listascompra.dialogos.OnTimeSetListener <|.. edu.pmdm.listascompra.dialogos.DialogoHora
+androidx.fragment.app.DialogFragment <|-- edu.pmdm.listascompra.dialogos.DialogoHora
+edu.pmdm.listascompra.dialogos.DialogoHora +.. edu.pmdm.listascompra.dialogos.DialogoHora$OnHoraSeleccionada
+edu.pmdm.listascompra.recycler_views.OnClickListener <|.. edu.pmdm.listascompra.recycler_views.ListaCompraViewHolder
+edu.pmdm.listascompra.recycler_views.ViewHolder <|-- edu.pmdm.listascompra.recycler_views.ListaCompraViewHolder
+androidx.fragment.app.DialogFragment <|-- edu.pmdm.listascompra.dialogos.DialogFragmentProductos
+edu.pmdm.listascompra.recycler_views.Adapter <|-- edu.pmdm.listascompra.recycler_views.ListaCompraAdapter
+edu.pmdm.listascompra.recycler_views.ListaCompraAdapter +.. edu.pmdm.listascompra.recycler_views.ListaCompraAdapter$onItemListaClickListener
+androidx.lifecycle.ViewModel <|-- edu.pmdm.listascompra.ui.compartir_lista.CompartirListaViewModel
+edu.pmdm.listascompra.recycler_views.Adapter <|-- edu.pmdm.listascompra.recycler_views.CompartirListaAdapter
+edu.pmdm.listascompra.recycler_views.CompartirListaAdapter +.. edu.pmdm.listascompra.recycler_views.CompartirListaAdapter$OnClickItemListener
+androidx.fragment.app.Fragment <|-- edu.pmdm.listascompra.ui.consultar_listas.ConsultarListasFragment
+edu.pmdm.listascompra.recycler_views.ViewHolder <|-- edu.pmdm.listascompra.recycler_views.ProductosViewHolder
+edu.pmdm.listascompra.recycler_views.ViewHolder <|-- edu.pmdm.listascompra.recycler_views.TodasListasViewHolder
+edu.pmdm.listascompra.recycler_views.TodasListasViewHolder +.. edu.pmdm.listascompra.recycler_views.TodasListasViewHolder$OnCambiarNombreListener
+edu.pmdm.listascompra.recycler_views.TodasListasViewHolder +.. edu.pmdm.listascompra.recycler_views.TodasListasViewHolder$OnMenuListasListener
+androidx.fragment.app.DialogFragment <|-- edu.pmdm.listascompra.dialogos.DialogFragmentCantidad
+edu.pmdm.listascompra.dialogos.DialogFragmentCantidad +.. edu.pmdm.listascompra.dialogos.DialogFragmentCantidad$onItemChangedListener
+androidx.appcompat.app.AppCompatActivity <|-- edu.pmdm.listascompra.ui.compartir_lista.CompartirListaActivity
+edu.pmdm.listascompra.recycler_views.ViewHolder <|-- edu.pmdm.listascompra.recycler_views.ContactosViewHolder
+androidx.lifecycle.ViewModel <|-- edu.pmdm.listascompra.ui.nueva_lista.NuevaListaViewModel
+edu.pmdm.listascompra.recycler_views.ViewHolder <|-- edu.pmdm.listascompra.recycler_views.CompartirListasViewHolder
+androidx.fragment.app.DialogFragment <|-- edu.pmdm.listascompra.dialogos.DialogFragmentEnviarSMS
+edu.pmdm.listascompra.dialogos.DialogFragmentEnviarSMS +.. edu.pmdm.listascompra.dialogos.DialogFragmentEnviarSMS$OnSmsEnviadoListener
+edu.pmdm.listascompra.recycler_views.Adapter <|-- edu.pmdm.listascompra.recycler_views.TodasListasAdapter
+@enduml

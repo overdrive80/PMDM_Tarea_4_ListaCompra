@@ -1,0 +1,11 @@
+@startuml
+class edu.pmdm.listascompra.datosexternos.DescargadorProductos {
+- {static} String JSON_URL
+- {static} String IMAGE_URL_BASE
++ List<Producto> getProductos()
+- {static} JSONArray getJsonArray(StringBuilder)
+- byte[] getImagenes(String)
+}
+
+
+@enduml

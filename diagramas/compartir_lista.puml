@@ -1,0 +1,51 @@
+@startuml
+class edu.pmdm.listascompra.ui.compartir_lista.CompartirListaActivity {
+- RecyclerView rvListasCompra
+- List<ListaCompra> listas
+- RepoListasCompras repo
+- ActivityCompartirListaBinding binding
+- CompartirListaViewModel viewModel
+- ListaCompra listaSeleccionada
+- Contacto contactoSeleccionado
+# void onCreate(Bundle)
+- CompartirListaAdapter.OnClickItemListener getImplListenerClick()
+- void mostrarDialogExitoSMS(String)
+- void getContactoSeleccionado()
+- void getListaCompra()
+- void gestionarToolbar()
++ boolean onOptionsItemSelected(MenuItem)
+}
+
+
+class edu.pmdm.listascompra.ui.compartir_lista.CompartirListaViewModel {
+- MutableLiveData<List<ListaCompra>> listasCompra
++ void setListasCompra(List<ListaCompra>)
++ LiveData<List<ListaCompra>> getListasCompra()
+}
+
+
+class edu.pmdm.listascompra.ui.compartir_lista.CompartirListaFragment {
+- FragmentCompartirListaBinding binding
+- RepoListasCompras repo
+- List<Contacto> listaContactos
+- RecyclerView rvContactos
+- {static} String[] PERMISOS_COMPARTIR
++ {static} String ID_CONTACTO
++ {static} String NOMBRE_CONTACTO
++ {static} String TELEFONO_CONTACTO
+- boolean modoDegradadoCompartir
+- ActivityResultLauncher<String[]> permisosLauncher
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
++ void onDestroyView()
+- void solicitarPermisos()
+- void obtenerContactos()
+}
+
+
+
+
+androidx.appcompat.app.AppCompatActivity <|-- edu.pmdm.listascompra.ui.compartir_lista.CompartirListaActivity
+androidx.lifecycle.ViewModel <|-- edu.pmdm.listascompra.ui.compartir_lista.CompartirListaViewModel
+androidx.fragment.app.Fragment <|-- edu.pmdm.listascompra.ui.compartir_lista.CompartirListaFragment
+@enduml

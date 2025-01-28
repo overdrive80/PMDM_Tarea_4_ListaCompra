@@ -1,0 +1,26 @@
+@startuml
+class edu.pmdm.listascompra.notificaciones.Notificacion {
++ {static} int NOTIFICATION_ID
++ {static} int PERMISSION_REQUEST_CODE
++ {static} void mostrarNotificacion(Context,String,String)
+}
+
+
+class edu.pmdm.listascompra.notificaciones.SmsBroadcastReceiver {
++ {static} String TELEFONO
++ {static} String MENSAJE
++ void onReceive(Context,Intent)
+}
+
+
+class edu.pmdm.listascompra.notificaciones.CanalNotificacionSMS {
++ {static} String CHANNEL_ID
++ {static} String CHANNEL_NAME
++ {static} void crearCanalNotificacion(Context)
+}
+
+
+
+
+android.content.BroadcastReceiver <|-- edu.pmdm.listascompra.notificaciones.SmsBroadcastReceiver
+@enduml

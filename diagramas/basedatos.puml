@@ -1,0 +1,88 @@
+@startuml
+class edu.pmdm.listascompra.basedatos.ContratoCompra {
++ {static} String NOMBRE_BBDD
++ {static} int VERSION_BBDD
+}
+
+class edu.pmdm.listascompra.basedatos.ContratoCompra$Productos {
++ {static} String NOMBRE_TABLA
++ {static} String NOMBRE_PRODUCTO
++ {static} String DESCRIPCION_PRODUCTO
++ {static} String IMAGEN_PRODUCTO
++ {static} String PRECIO_PRODUCTO
++ {static} String VECES_COMPRADO
++ {static} String CREAR_TABLA
++ {static} String BORRAR_TABLA
+}
+
+class edu.pmdm.listascompra.basedatos.ContratoCompra$ListasCompra {
++ {static} String NOMBRE_TABLA
++ {static} String NOMBRE_LISTA
++ {static} String FECHA_LISTA
++ {static} String CREAR_TABLA
++ {static} String BORRAR_TABLA
+}
+
+class edu.pmdm.listascompra.basedatos.ContratoCompra$DetalleLista {
++ {static} String NOMBRE_TABLA
++ {static} String ID_LISTA
++ {static} String ID_PRODUCTO
++ {static} String CANTIDAD
++ {static} String UNIDAD
++ {static} String CREAR_TABLA
++ {static} String BORRAR_TABLA
+}
+
+class edu.pmdm.listascompra.basedatos.ConexionBBDD {
+- Context contexto
+- {static} ConexionBBDD conexion
++ {static} ConexionBBDD getInstance(Context)
++ void onCreate(SQLiteDatabase)
++ void onUpgrade(SQLiteDatabase,int,int)
++ void borrarTablas()
++ void eliminarBaseDeDatos()
+}
+
+
+class edu.pmdm.listascompra.basedatos.RepoListasCompras {
+- ConexionBBDD conexion
+- Context contexto
+- {static} String TAG
++ long insertarProducto(Producto)
++ boolean hayProductos()
++ Producto getProducto(int)
++ List<Producto> getProductos()
++ void incrementarVeces(long)
++ void decrementarVeces(long)
++ boolean existeProductoNombre(String)
++ long insertarLista(String)
++ boolean existeNombreLista(String)
++ int cambiarNombreLista(int,String)
++ List<ListaCompra> getListas()
++ int eliminarLista(int)
++ long insertarDetalleLista(long,long,Double,String)
++ List<ItemLista> getDetalleLista(int)
++ void eliminarDetalleLista(int,int)
++ void modificarDetalleLista(int,int,Double,String)
+}
+
+
+class edu.pmdm.listascompra.basedatos.ConsultarContactos {
+- Context contexto
+- {static} ContentResolver contentResolver
+- {static} List<Contacto> listaContactos
++ {static} List<Contacto> getListaContactos(Context)
++ {static} Contacto getContacto(Context,int)
+}
+
+
+
+
+edu.pmdm.listascompra.basedatos.ContratoCompra +.. edu.pmdm.listascompra.basedatos.ContratoCompra$Productos
+edu.pmdm.listascompra.basedatos.BaseColumns <|.. edu.pmdm.listascompra.basedatos.ContratoCompra$Productos
+edu.pmdm.listascompra.basedatos.ContratoCompra +.. edu.pmdm.listascompra.basedatos.ContratoCompra$ListasCompra
+edu.pmdm.listascompra.basedatos.BaseColumns <|.. edu.pmdm.listascompra.basedatos.ContratoCompra$ListasCompra
+edu.pmdm.listascompra.basedatos.ContratoCompra +.. edu.pmdm.listascompra.basedatos.ContratoCompra$DetalleLista
+edu.pmdm.listascompra.basedatos.BaseColumns <|.. edu.pmdm.listascompra.basedatos.ContratoCompra$DetalleLista
+android.database.sqlite.SQLiteOpenHelper <|-- edu.pmdm.listascompra.basedatos.ConexionBBDD
+@enduml

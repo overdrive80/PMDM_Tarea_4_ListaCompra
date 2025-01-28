@@ -1,0 +1,111 @@
+@startuml
+class edu.pmdm.listascompra.dialogos.DialogoFecha {
+~ OnFechaSeleccionada listener
++ Dialog onCreateDialog(Bundle)
++ void onDateSet(DatePicker,int,int,int)
++ void setOnFechaSeleccionada(OnFechaSeleccionada)
+}
+
+
+interface edu.pmdm.listascompra.dialogos.DialogoFecha$OnFechaSeleccionada {
++ void onResultadoFecha(GregorianCalendar)
+}
+
+class edu.pmdm.listascompra.dialogos.DialogFragmentCantidad {
+- EditText etCantidad
+- ImageButton ibMenos
+- ChipGroup chipGroup
+- Chip cpLitros
+- View dialogView
+- ItemLista item
+- int posicion
+- onItemChangedListener listener
++ Dialog onCreateDialog(Bundle)
+- void setupReferencias()
+- void setupListeners()
+- void updateUnidad(Chip)
+- void disminuirCantidad()
+- void aumentarCantidad()
++ void onDismiss(DialogInterface)
+}
+
+
+interface edu.pmdm.listascompra.dialogos.DialogFragmentCantidad$onItemChangedListener {
++ void onItemChanged(ItemLista,int)
+}
+
+class edu.pmdm.listascompra.dialogos.DialogFragmentEnviarSMS {
+- {static} String ARG_LISTA
+- ListaCompra lista
+- Contacto contacto
+- CheckBox chkProgramar
+- EditText etFechaSMS
+- Button btnEnviarSMS
+- ImageButton ibCalendar
+- OnSmsEnviadoListener listener
+- String mensajeSMS
+- Context contexto
+- GregorianCalendar fechaElegida
+- GregorianCalendar horaElegida
++ {static} DialogFragmentEnviarSMS newInstance(Contacto,ListaCompra)
++ Dialog onCreateDialog(Bundle)
+- void configurarVistas()
+- void programarEnvioSMS()
+- void enviarSMS(String)
+- String contruirMensaje()
++ Contacto getContacto()
++ void setContacto(Contacto)
++ ListaCompra getLista()
++ void setLista(ListaCompra)
+- void configurarCheckBoxProgramar()
+- void configurarBotonFecha()
+- void configurarBotonHora()
+- void configurarBotonEnviar()
+- DialogoHora.OnHoraSeleccionada getImplListenerHora()
+- DialogoFecha.OnFechaSeleccionada getImplListenerFecha()
++ void setOnSmsEnviadoListener(OnSmsEnviadoListener)
+}
+
+
+interface edu.pmdm.listascompra.dialogos.DialogFragmentEnviarSMS$OnSmsEnviadoListener {
+~ void onSmsEnviadoExito(String)
+~ void onSmsErrorEnvio(String)
+~ void onSmsProgramadoExito(String)
+~ void onSmsErrorProgramado(String)
+}
+
+class edu.pmdm.listascompra.dialogos.DialogoHora {
+~ OnHoraSeleccionada listener
++ Dialog onCreateDialog(Bundle)
++ void onTimeSet(TimePicker,int,int)
++ void setOnHoraSeleccionada(OnHoraSeleccionada)
+}
+
+
+interface edu.pmdm.listascompra.dialogos.DialogoHora$OnHoraSeleccionada {
++ void onResultadoHora(GregorianCalendar)
+}
+
+class edu.pmdm.listascompra.dialogos.DialogFragmentProductos {
+- List<Producto> productos
+- Set<Integer> productosSeleccionados
+- ProductosAdapter.OnProductoSeleccionadoListener listener
++ Dialog onCreateDialog(Bundle)
++ void setOnProductoSeleccionadoListener(ProductosAdapter.OnProductoSeleccionadoListener)
+}
+
+
+
+
+edu.pmdm.listascompra.dialogos.OnDateSetListener <|.. edu.pmdm.listascompra.dialogos.DialogoFecha
+androidx.fragment.app.DialogFragment <|-- edu.pmdm.listascompra.dialogos.DialogoFecha
+edu.pmdm.listascompra.dialogos.DialogoFecha +.. edu.pmdm.listascompra.dialogos.DialogoFecha$OnFechaSeleccionada
+androidx.fragment.app.DialogFragment <|-- edu.pmdm.listascompra.dialogos.DialogFragmentCantidad
+edu.pmdm.listascompra.dialogos.DialogFragmentCantidad +.. edu.pmdm.listascompra.dialogos.DialogFragmentCantidad$onItemChangedListener
+androidx.fragment.app.DialogFragment <|-- edu.pmdm.listascompra.dialogos.DialogFragmentEnviarSMS
+edu.pmdm.listascompra.dialogos.DialogFragmentEnviarSMS +.. edu.pmdm.listascompra.dialogos.DialogFragmentEnviarSMS$OnSmsEnviadoListener
+edu.pmdm.listascompra.dialogos.OnTimeSetListener <|.. edu.pmdm.listascompra.dialogos.DialogoHora
+androidx.fragment.app.DialogFragment <|-- edu.pmdm.listascompra.dialogos.DialogoHora
+edu.pmdm.listascompra.dialogos.DialogoHora +.. edu.pmdm.listascompra.dialogos.DialogoHora$OnHoraSeleccionada
+androidx.fragment.app.DialogFragment <|-- edu.pmdm.listascompra.dialogos.DialogFragmentProductos
+@enduml

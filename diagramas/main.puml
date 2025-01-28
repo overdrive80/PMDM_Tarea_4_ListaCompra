@@ -1,0 +1,19 @@
+@startuml
+class edu.pmdm.listascompra.MainActivity {
+- AppBarConfiguration mAppBarConfiguration
+- MainActivityBinding binding
+- ConexionBBDD conexion
+- RepoListasCompras repo
+- NavController navController
+# void onCreate(Bundle)
+# void onStart()
+- void cargarProductos()
+- void configurarInterfaz()
++ boolean onSupportNavigateUp()
+}
+
+
+
+
+androidx.appcompat.app.AppCompatActivity <|-- edu.pmdm.listascompra.MainActivity
+@enduml

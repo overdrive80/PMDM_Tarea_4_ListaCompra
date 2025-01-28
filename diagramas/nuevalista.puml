@@ -1,0 +1,61 @@
+@startuml
+class edu.pmdm.listascompra.ui.nueva_lista.NuevaListaActivity {
+- String nombreLista
+- RecyclerView rvListaCompra
+- List<Producto> productos
+- List<ItemLista> listaCompra
+- List<ItemLista> listaOriginal
+- Set<Integer> productosSeleccionados
+- RepoListasCompras repo
+- FloatingActionButton fab
+- ListaCompraAdapter listaCompraAdapter
+- ActivityNuevaListaBinding binding
+- boolean modoEdicion
+- int idLista
+- OnBackPressedCallback onBackPressedCallback
+# void onCreate(Bundle)
+- void cargarProductos()
+- void cargarDetallesLista(int)
+- void mostrarDialogoProductos()
++ boolean onOptionsItemSelected(MenuItem)
+- void guardarYsalir()
+- void modificarLista()
+- void guardarLista()
++ void mostrarDialogCantidad(ItemLista,int)
+}
+
+
+class edu.pmdm.listascompra.ui.nueva_lista.NuevaListaFragment {
+- FragmentNuevaListaBinding binding
+- EditText etNombreLista
+- Button btnCrearLista
+- NuevaListaViewModel viewModel
+- RepoListasCompras repo
+- String nombreLista
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
+- void comprobarNombreLista(Callback<Boolean>)
+- void crearLista(View)
++ void onStop()
++ void onDestroyView()
+}
+
+
+interface edu.pmdm.listascompra.ui.nueva_lista.NuevaListaFragment$Callback {
+~ void onResult(T)
+}
+
+class edu.pmdm.listascompra.ui.nueva_lista.NuevaListaViewModel {
+- MutableLiveData<String> mText
++ LiveData<String> getText()
++ void setText(String)
+}
+
+
+
+
+androidx.appcompat.app.AppCompatActivity <|-- edu.pmdm.listascompra.ui.nueva_lista.NuevaListaActivity
+androidx.fragment.app.Fragment <|-- edu.pmdm.listascompra.ui.nueva_lista.NuevaListaFragment
+edu.pmdm.listascompra.ui.nueva_lista.NuevaListaFragment +.. edu.pmdm.listascompra.ui.nueva_lista.NuevaListaFragment$Callback
+androidx.lifecycle.ViewModel <|-- edu.pmdm.listascompra.ui.nueva_lista.NuevaListaViewModel
+@enduml

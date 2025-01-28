@@ -1,0 +1,59 @@
+@startuml
+class edu.pmdm.listascompra.gestores.GestorFechas {
++ {static} String PATRON_UTC
++ {static} java.util.Date toDate(java.sql.Date)
++ {static} java.sql.Date toSQLDate(java.util.Date)
++ {static} String toString(java.util.Date,String)
++ {static} java.util.Date toDate(String,String)
++ {static} String toLocalTimeString(java.util.Date,String)
++ {static} java.util.Date toLocalfromUTC(String)
+}
+
+
+class edu.pmdm.listascompra.gestores.GestorPermisos {
+- Context context
+- Activity activity
+- Fragment fragment
+- PermisosCallback callback
+- ActivityResultLauncher<String[]> permisosLauncher
+- void setupLauncher()
++ void comprobarResultadosPermisos(String[],PermisosCallback)
+- void manejarResultadosPermisos(Map<String,Boolean>)
+- String[] getPermisosDenegados(String[])
+}
+
+
+interface edu.pmdm.listascompra.gestores.GestorPermisos$PermisosCallback {
+~ void onPermisosConcedidos()
+~ void onPermisosDenegados(String[])
+}
+
+class edu.pmdm.listascompra.gestores.GestorSMS {
++ {static} List<String> dividirMensaje(String)
+}
+
+class edu.pmdm.listascompra.gestores.GestorNumeros {
++ {static} int stringAInt(String)
++ {static} long stringALong(String)
++ {static} double stringADouble(String)
++ {static} String intAString(int)
++ {static} String longAString(long)
++ {static} String doubleAString(double)
++ {static} void main(String[])
+}
+
+class edu.pmdm.listascompra.gestores.Info {
++ {static} void mostrarNombre(Context,View)
+}
+
+class edu.pmdm.listascompra.gestores.GestorImagenes {
+- {static} String TAG
++ {static} Bitmap obtenerImagenDesdeUri(Context,Uri)
++ {static} byte[] convertBitmapToBytes(Bitmap)
+}
+
+
+
+
+edu.pmdm.listascompra.gestores.GestorPermisos +.. edu.pmdm.listascompra.gestores.GestorPermisos$PermisosCallback
+@enduml

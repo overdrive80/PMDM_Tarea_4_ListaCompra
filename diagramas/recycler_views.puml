@@ -1,0 +1,162 @@
+@startuml
+class edu.pmdm.listascompra.recycler_views.ContactosAdapter {
+- List<Contacto> listaContactos
+- Context contexto
+- onContactoLongClickListener listener
++ ContactosViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(ContactosViewHolder,int)
++ int getItemCount()
++ void setOnLongClickListener(onContactoLongClickListener)
+}
+
+
+interface edu.pmdm.listascompra.recycler_views.ContactosAdapter$onContactoLongClickListener {
+~ void onContactoLongClick(int,Contacto)
+}
+
+class edu.pmdm.listascompra.recycler_views.TodasListasViewHolder {
+- EditText etNombreLista
+- TextView tvFechaCreacion
+- ImageButton ibEditarNombre
+- ImageButton ibMenuOpciones
+- Context contexto
+- String nombreOriginal
+- ListaCompra listaCompraItem
+- OnCambiarNombreListener listenerNombreValido
+- OnMenuListasListener listenerMenu
++ void bind(ListaCompra)
+- void restaurarNombre()
++ View.OnClickListener getImplOnClickListener()
+- View.OnFocusChangeListener getImplOnFocusChangeListener()
++ void setOnCambiarNombreListener(OnCambiarNombreListener)
++ void setOnMenuListasListener(OnMenuListasListener)
+}
+
+
+interface edu.pmdm.listascompra.recycler_views.TodasListasViewHolder$OnCambiarNombreListener {
+~ boolean esCambioCorrecto(int,String)
+}
+
+interface edu.pmdm.listascompra.recycler_views.TodasListasViewHolder$OnMenuListasListener {
+~ void onBotonEditar(int,int)
+~ void onBotonBorrar(int,int)
+}
+
+class edu.pmdm.listascompra.recycler_views.ListaCompraAdapter {
+- List<ItemLista> listaCompra
+- Context contexto
+- onItemListaClickListener listener
++ ListaCompraViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(ListaCompraViewHolder,int)
++ int getItemCount()
+}
+
+
+interface edu.pmdm.listascompra.recycler_views.ListaCompraAdapter$onItemListaClickListener {
+~ void onItemListaClick(int)
+}
+
+class edu.pmdm.listascompra.recycler_views.ContactosViewHolder {
+- Context contexto
+- int idContacto
+- TextView tvNombreContacto
+- TextView tvTelefono
++ void bind(Contacto)
+}
+
+
+class edu.pmdm.listascompra.recycler_views.ProductosAdapter {
+- List<Producto> productos
+- Set<Integer> productosSeleccionados
+- OnProductoSeleccionadoListener listener
++ ProductosViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(ProductosViewHolder,int)
++ int getItemCount()
++ void setProductos(List<Producto>)
+}
+
+
+interface edu.pmdm.listascompra.recycler_views.ProductosAdapter$OnProductoSeleccionadoListener {
+~ void onProductoSeleccionado(Producto,boolean)
+}
+
+class edu.pmdm.listascompra.recycler_views.CompartirListaAdapter {
+- Context contexto
+- List<ListaCompra> listas
+- OnClickItemListener listener
++ CompartirListasViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(CompartirListasViewHolder,int)
++ int getItemCount()
++ void setOnItemClickListener(OnClickItemListener)
+}
+
+
+interface edu.pmdm.listascompra.recycler_views.CompartirListaAdapter$OnClickItemListener {
+~ void onItemClick(int,ListaCompra)
+}
+
+class edu.pmdm.listascompra.recycler_views.CompartirListasViewHolder {
+- Context contexto
+- TextView tvNombreLista
+- TextView tvFechaCreacion
+- CompartirListaAdapter.OnClickItemListener listener
+- ListaCompra listaCompra
++ void bind(ListaCompra,CompartirListaAdapter.OnClickItemListener)
++ void setOnItemClickListener(CompartirListaAdapter.OnClickItemListener)
+}
+
+
+class edu.pmdm.listascompra.recycler_views.ProductosViewHolder {
+- TextView tvNombre
+- CheckBox chkProducto
++ void bind(Producto,Boolean,ProductosAdapter.OnProductoSeleccionadoListener)
+}
+
+
+class edu.pmdm.listascompra.recycler_views.TodasListasAdapter {
+- List<ListaCompra> listas
+- Context contexto
+- TodasListasViewHolder.OnCambiarNombreListener listenerNombreValido
+- TodasListasViewHolder.OnMenuListasListener listenerMenu
++ TodasListasViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(TodasListasViewHolder,int)
++ int getItemCount()
++ void setOnCambiarNombreListener(TodasListasViewHolder.OnCambiarNombreListener)
++ void setOnMenuListasListener(TodasListasViewHolder.OnMenuListasListener)
+}
+
+
+class edu.pmdm.listascompra.recycler_views.ListaCompraViewHolder {
+- TextView tvNombre
+- TextView tvDescripcion
+- TextView tvPrecio
+- ImageView ivImagen
+- TextView tvCantidad
+- TextView tvUnidad
+- Context contexto
+- ListaCompraAdapter.onItemListaClickListener listener
++ void bind(ItemLista)
++ void onClick(View)
+}
+
+
+
+
+edu.pmdm.listascompra.recycler_views.Adapter <|-- edu.pmdm.listascompra.recycler_views.ContactosAdapter
+edu.pmdm.listascompra.recycler_views.ContactosAdapter +.. edu.pmdm.listascompra.recycler_views.ContactosAdapter$onContactoLongClickListener
+edu.pmdm.listascompra.recycler_views.ViewHolder <|-- edu.pmdm.listascompra.recycler_views.TodasListasViewHolder
+edu.pmdm.listascompra.recycler_views.TodasListasViewHolder +.. edu.pmdm.listascompra.recycler_views.TodasListasViewHolder$OnCambiarNombreListener
+edu.pmdm.listascompra.recycler_views.TodasListasViewHolder +.. edu.pmdm.listascompra.recycler_views.TodasListasViewHolder$OnMenuListasListener
+edu.pmdm.listascompra.recycler_views.Adapter <|-- edu.pmdm.listascompra.recycler_views.ListaCompraAdapter
+edu.pmdm.listascompra.recycler_views.ListaCompraAdapter +.. edu.pmdm.listascompra.recycler_views.ListaCompraAdapter$onItemListaClickListener
+edu.pmdm.listascompra.recycler_views.ViewHolder <|-- edu.pmdm.listascompra.recycler_views.ContactosViewHolder
+edu.pmdm.listascompra.recycler_views.Adapter <|-- edu.pmdm.listascompra.recycler_views.ProductosAdapter
+edu.pmdm.listascompra.recycler_views.ProductosAdapter +.. edu.pmdm.listascompra.recycler_views.ProductosAdapter$OnProductoSeleccionadoListener
+edu.pmdm.listascompra.recycler_views.Adapter <|-- edu.pmdm.listascompra.recycler_views.CompartirListaAdapter
+edu.pmdm.listascompra.recycler_views.CompartirListaAdapter +.. edu.pmdm.listascompra.recycler_views.CompartirListaAdapter$OnClickItemListener
+edu.pmdm.listascompra.recycler_views.ViewHolder <|-- edu.pmdm.listascompra.recycler_views.CompartirListasViewHolder
+edu.pmdm.listascompra.recycler_views.ViewHolder <|-- edu.pmdm.listascompra.recycler_views.ProductosViewHolder
+edu.pmdm.listascompra.recycler_views.Adapter <|-- edu.pmdm.listascompra.recycler_views.TodasListasAdapter
+edu.pmdm.listascompra.recycler_views.OnClickListener <|.. edu.pmdm.listascompra.recycler_views.ListaCompraViewHolder
+edu.pmdm.listascompra.recycler_views.ViewHolder <|-- edu.pmdm.listascompra.recycler_views.ListaCompraViewHolder
+@enduml

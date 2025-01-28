@@ -1,0 +1,119 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <ImageButton
+        android:id="@+id/ibCalendar"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="Agregar fecha"
+        android:src="@drawable/baseline_calendar_month_24"
+        android:clickable="false"
+        app:layout_constraintBottom_toBottomOf="@+id/etFechaSMS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/etFechaSMS"
+        app:layout_constraintTop_toTopOf="@+id/etFechaSMS" />
+
+    <ImageButton
+        android:id="@+id/ibHora"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="Agregar hora"
+        android:src="@drawable/baseline_access_time_24"
+        android:clickable="false"
+        app:layout_constraintBottom_toBottomOf="@+id/etHoraSMS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/etHoraSMS"
+        app:layout_constraintTop_toTopOf="@+id/etHoraSMS" />
+
+    <TextView
+        android:id="@+id/tvProgramar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/quieres_programar_el_envio"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/chkProgramar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/programar"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvProgramar" />
+
+    <EditText
+        android:id="@+id/etFechaSMS"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/dd_mm_aa"
+        android:inputType="date"
+        android:minHeight="48dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvFecha"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toEndOf="@+id/tvFecha"
+        tools:ignore="Autofill,TextContrastCheck,VisualLintTextFieldSize" />
+
+    <EditText
+        android:id="@+id/etHoraSMS"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/hh_mm"
+        android:inputType="time"
+        android:minHeight="48dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvHora"
+        app:layout_constraintEnd_toEndOf="@+id/etFechaSMS"
+        app:layout_constraintStart_toEndOf="@id/barrierSMS"
+        tools:ignore="Autofill,TextContrastCheck,VisualLintTextFieldSize" />
+
+    <Button
+        android:id="@+id/btnEnviarSMS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/enviar_sms"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etHoraSMS"
+        tools:ignore="TextContrastCheck" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierSMS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="tvFecha" />
+
+    <TextView
+        android:id="@+id/tvFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/fecha"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chkProgramar" />
+
+    <TextView
+        android:id="@+id/tvHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/hora"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFecha" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

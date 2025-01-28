@@ -1,0 +1,28 @@
+@startuml
+class edu.pmdm.listascompra.ui.consultar_listas.ConsultarListasFragment {
+- FragmentConsultarListasBinding binding
+- RecyclerView rvListasCompra
+- RepoListasCompras repo
+- List<ListaCompra> listas
+- TodasListasAdapter adapter
+- ConsultarListasViewModel viewModel
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
+- TodasListasViewHolder.OnCambiarNombreListener getImplOnCambiarNombreListener()
++ void onDestroyView()
+}
+
+
+class edu.pmdm.listascompra.ui.consultar_listas.ConsultarListasViewModel {
+- MutableLiveData<List<ListaCompra>> listasCompra
++ void setListasCompra(List<ListaCompra>)
++ LiveData<List<ListaCompra>> getListasCompra()
+}
+
+
+
+
+androidx.fragment.app.Fragment <|-- edu.pmdm.listascompra.ui.consultar_listas.ConsultarListasFragment
+androidx.lifecycle.ViewModel <|-- edu.pmdm.listascompra.ui.consultar_listas.ConsultarListasViewModel
+@enduml

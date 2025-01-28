@@ -1,0 +1,151 @@
+@startuml
+class edu.pmdm.listascompra.ui.nueva_lista.NuevaListaActivity {
+- String nombreLista
+- RecyclerView rvListaCompra
+- List<Producto> productos
+- List<ItemLista> listaCompra
+- List<ItemLista> listaOriginal
+- Set<Integer> productosSeleccionados
+- RepoListasCompras repo
+- FloatingActionButton fab
+- ListaCompraAdapter listaCompraAdapter
+- ActivityNuevaListaBinding binding
+- boolean modoEdicion
+- int idLista
+- OnBackPressedCallback onBackPressedCallback
+# void onCreate(Bundle)
+- void cargarProductos()
+- void cargarDetallesLista(int)
+- void mostrarDialogoProductos()
++ boolean onOptionsItemSelected(MenuItem)
+- void guardarYsalir()
+- void modificarLista()
+- void guardarLista()
++ void mostrarDialogCantidad(ItemLista,int)
+}
+
+
+class edu.pmdm.listascompra.ui.nueva_lista.NuevaListaFragment {
+- FragmentNuevaListaBinding binding
+- EditText etNombreLista
+- Button btnCrearLista
+- NuevaListaViewModel viewModel
+- RepoListasCompras repo
+- String nombreLista
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
+- void comprobarNombreLista(Callback<Boolean>)
+- void crearLista(View)
++ void onStop()
++ void onDestroyView()
+}
+
+
+interface edu.pmdm.listascompra.ui.nueva_lista.NuevaListaFragment$Callback {
+~ void onResult(T)
+}
+
+class edu.pmdm.listascompra.ui.compartir_lista.CompartirListaActivity {
+- RecyclerView rvListasCompra
+- List<ListaCompra> listas
+- RepoListasCompras repo
+- ActivityCompartirListaBinding binding
+- CompartirListaViewModel viewModel
+- ListaCompra listaSeleccionada
+- Contacto contactoSeleccionado
+# void onCreate(Bundle)
+- CompartirListaAdapter.OnClickItemListener getImplListenerClick()
+- void mostrarDialogExitoSMS(String)
+- void getContactoSeleccionado()
+- void getListaCompra()
+- void gestionarToolbar()
++ boolean onOptionsItemSelected(MenuItem)
+}
+
+
+class edu.pmdm.listascompra.ui.compartir_lista.CompartirListaViewModel {
+- MutableLiveData<List<ListaCompra>> listasCompra
++ void setListasCompra(List<ListaCompra>)
++ LiveData<List<ListaCompra>> getListasCompra()
+}
+
+
+class edu.pmdm.listascompra.ui.compartir_lista.CompartirListaFragment {
+- FragmentCompartirListaBinding binding
+- RepoListasCompras repo
+- List<Contacto> listaContactos
+- RecyclerView rvContactos
+- {static} String[] PERMISOS_COMPARTIR
++ {static} String ID_CONTACTO
++ {static} String NOMBRE_CONTACTO
++ {static} String TELEFONO_CONTACTO
+- boolean modoDegradadoCompartir
+- ActivityResultLauncher<String[]> permisosLauncher
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
++ void onDestroyView()
+- void solicitarPermisos()
+- void obtenerContactos()
+}
+
+
+class edu.pmdm.listascompra.ui.crear_producto.CrearProductoViewModel {
+}
+class edu.pmdm.listascompra.ui.crear_producto.CrearProductoFragment {
+- CrearProductoViewModel viewModel
+- FragmentCrearProductoBinding binding
+- Bitmap imagenSeleccionada
+- ActivityResultLauncher<Intent> eleccionImagen
+- RepoListasCompras repo
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
+- void guardarProducto(View)
+- void seleccionarImagen()
+- void resetearCampos()
++ void onDestroyView()
+}
+
+
+class edu.pmdm.listascompra.ui.nueva_lista.NuevaListaViewModel {
+- MutableLiveData<String> mText
++ LiveData<String> getText()
++ void setText(String)
+}
+
+
+class edu.pmdm.listascompra.ui.consultar_listas.ConsultarListasFragment {
+- FragmentConsultarListasBinding binding
+- RecyclerView rvListasCompra
+- RepoListasCompras repo
+- List<ListaCompra> listas
+- TodasListasAdapter adapter
+- ConsultarListasViewModel viewModel
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
+- TodasListasViewHolder.OnCambiarNombreListener getImplOnCambiarNombreListener()
++ void onDestroyView()
+}
+
+
+class edu.pmdm.listascompra.ui.consultar_listas.ConsultarListasViewModel {
+- MutableLiveData<List<ListaCompra>> listasCompra
++ void setListasCompra(List<ListaCompra>)
++ LiveData<List<ListaCompra>> getListasCompra()
+}
+
+
+
+
+androidx.appcompat.app.AppCompatActivity <|-- edu.pmdm.listascompra.ui.nueva_lista.NuevaListaActivity
+androidx.fragment.app.Fragment <|-- edu.pmdm.listascompra.ui.nueva_lista.NuevaListaFragment
+edu.pmdm.listascompra.ui.nueva_lista.NuevaListaFragment +.. edu.pmdm.listascompra.ui.nueva_lista.NuevaListaFragment$Callback
+androidx.appcompat.app.AppCompatActivity <|-- edu.pmdm.listascompra.ui.compartir_lista.CompartirListaActivity
+androidx.lifecycle.ViewModel <|-- edu.pmdm.listascompra.ui.compartir_lista.CompartirListaViewModel
+androidx.fragment.app.Fragment <|-- edu.pmdm.listascompra.ui.compartir_lista.CompartirListaFragment
+androidx.lifecycle.ViewModel <|-- edu.pmdm.listascompra.ui.crear_producto.CrearProductoViewModel
+androidx.fragment.app.Fragment <|-- edu.pmdm.listascompra.ui.crear_producto.CrearProductoFragment
+androidx.lifecycle.ViewModel <|-- edu.pmdm.listascompra.ui.nueva_lista.NuevaListaViewModel
+androidx.fragment.app.Fragment <|-- edu.pmdm.listascompra.ui.consultar_listas.ConsultarListasFragment
+androidx.lifecycle.ViewModel <|-- edu.pmdm.listascompra.ui.consultar_listas.ConsultarListasViewModel
+@enduml

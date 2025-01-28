@@ -1,0 +1,47 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="AppBaseTheme" parent="Theme.Material3.DayNight">
+        <!-- Colores principales de la aplicación -->
+        <item name="colorPrimary">@color/blue_500</item>             <!-- Color primario utilizado en la interfaz -->
+        <item name="colorPrimaryDark">@color/blue_200</item>        <!-- Color más oscuro del primario, usado en elementos como la barra de estado -->
+        <item name="colorAccent">@color/blue_200</item>             <!-- Color de acento utilizado en elementos resaltados -->
+        <item name="colorPrimaryVariant">@color/blue_700</item>     <!-- Variantes del color primario, usadas en temas y componentes -->
+
+        <!-- Colores secundarios -->
+        <item name="colorSecondary">@color/teal_200</item>          <!-- Color secundario utilizado en la interfaz -->
+        <item name="colorSecondaryVariant">@color/teal_700</item>   <!-- Variantes del color secundario, usadas en temas y componentes -->
+
+        <!-- Colores de texto -->
+        <item name="colorOnPrimary">@color/white</item>             <!-- Color del texto sobre fondos primarios -->
+        <item name="colorOnSecondary">@color/white</item>           <!-- Color del texto sobre fondos secundarios -->
+
+        <!-- Configuración de la barra de estado y fondo de la ventana -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item> <!-- Color de la barra de estado -->
+        <item name="android:windowBackground">@color/white</item>    <!-- Color de fondo de la ventana principal -->
+
+        <!-- <item name="android:textColorSecondary">@color/white</item>   Controla el color de la barra de los edittext -->
+    </style>
+
+    <style name="Theme.MiApp" parent="AppBaseTheme">
+        <!-- Estilo específico para la acción de la barra -->
+        <item name="android:actionOverflowButtonStyle">@style/OverflowButton</item> <!-- Estilo para el botón de desbordamiento -->
+    </style>
+
+    <style name="Theme.MiApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.MiApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.MiApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="OverflowButton" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/white</item>                <!-- Color de tinte del botón de desbordamiento -->
+    </style>
+
+    <style name="ButtonStyle" parent="ThemeOverlay.Material3.Button">
+        <item name="android:textSize">20dp</item>
+    </style>
+
+</resources>

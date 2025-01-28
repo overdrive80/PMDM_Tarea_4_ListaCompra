@@ -1,0 +1,77 @@
+@startuml
+class edu.pmdm.listascompra.modelo.Contacto {
+- int id
+- String nombre
+- String telefono
++ int getId()
++ void setId(int)
++ String getNombre()
++ void setNombre(String)
++ String getTelefono()
++ void setTelefono(String)
++ String toString()
+}
+
+
+class edu.pmdm.listascompra.modelo.Producto {
+- int id
+- String nombre
+- String descripcion
+- String nombreImagen
+- double precio
+- byte[] imagenBlob
+- int vecesComprado
++ int getVecesComprado()
++ void setVecesComprado(int)
++ int getId()
++ void setId(int)
++ String getNombre()
++ void setNombre(String)
++ String getDescripcion()
++ void setDescripcion(String)
++ String getNombreImagen()
++ void setNombreImagen(String)
++ double getPrecio()
++ void setPrecio(double)
++ byte[] getImagenBlob()
++ void setImagenBlob(byte[])
++ String toString()
+}
+
+
+class edu.pmdm.listascompra.modelo.ListaCompra {
+- int id
+- String nombre
+- Date fecha
+- List<ItemLista> items
+- String patronEntrada
+- String patronSalida
++ int getId()
++ void setId(int)
++ String getNombre()
++ void setNombre(String)
++ Date getFecha()
++ void setFecha(Date)
++ String getFechaString(String)
++ List<ItemLista> getItems()
++ void setItems(List<ItemLista>)
++ String toString()
+}
+
+
+class edu.pmdm.listascompra.modelo.ItemLista {
+- Producto producto
+- Double cantidad
+- String unidad
++ Producto getProducto()
++ Double getCantidad()
++ void setCantidad(Double)
++ void setProducto(Producto)
++ String getUnidad()
++ void setUnidad(String)
++ boolean haSidoModificado(ItemLista)
++ String toString()
+}
+
+
+@enduml

@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">Tarea4_24_25</string>
+    <string name="navigation_drawer_open">Abrir el panel de navegación</string>
+    <string name="navigation_drawer_close">Cerrar el panel de navegación</string>
+    <string name="nav_header_title">Ribera del Tajo</string>
+    <string name="nav_header_subtitle">ilucast03@educastillalamancha.es</string>
+    <string name="nav_header_desc">Encabezado de navegación</string>
+    <string name="action_settings">Ajustes</string>
+
+    <string name="menu_nueva_lista">Nueva Lista</string>
+    <string name="menu_consultar_listas">Consultar listas</string>
+    <string name="menu_crear_producto">Crear producto</string>
+    <string name="menu_compartir_lista">Compartir Lista</string>
+    <string name="crear_lista">Crear lista</string>
+    <string name="titulo_nueva_lista">Escribe el nombre de la nueva lista</string>
+    <string name="nueva_lista">Nueva lista</string>
+    <string name="desc_producto">Imagen producto</string>
+    <string name="nombre_producto">Nombre producto</string>
+    <string name="descripcion_producto">Descripción del producto</string>
+    <string name="nombre_nueva_lista">Nombre lista: %s</string>
+    <string name="insertar_nueva_lista">Añadir nueva lista</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="unidades">Unidad</string>
+    <string name="cantidad_abrev">Cant.</string>
+    <string name="unidades_abrev">Uds.</string>
+    <string name="precio">Precio: %1$.2f euros</string>
+    <string name="masproducto">Agregar productos</string>
+    <string name="productos">Productos</string>
+    <string name="incluir_productos">Añadir productos</string>
+    <string name="salir">Salir</string>
+    <string name="mas">mas</string>
+    <string name="menos">menos</string>
+    <string name="gramos">g</string>
+    <string name="kilogramos">kg</string>
+    <string name="litros">l</string>
+    <string name="mililitros">ml</string>
+    <string name="nombrelista">Nombre lista</string>
+    <string name="editar_nombre">Editar nombre</string>
+    <string name="opciones">Opciones</string>
+    <string name="fecha_creacion">Fecha creación: %s</string>
+    <string name="mis_listas_de_la_compra">Mis listas de la compra</string>
+    <string name="guardar">Guardar</string>
+    <string name="descripcion">Descripción:</string>
+    <string name="imagen">Imagen:</string>
+    <string name="nombre">Nombre:</string>
+    <string name="introduce_los_datos_del_nuevo_producto">Introduce los datos del nuevo producto</string>
+    <string name="precio_nuevo">Precio:</string>
+    <string name="descripcion_hint">Descripción</string>
+    <string name="precio_hint">Precio</string>
+    <string name="seleccion_contacto">Seleccione un contacto para enviar lista.\nHaga un clic largo.</string>
+    <string name="seleccion_lista_compartir">Seleccione una lista</string>
+
+    <string-array name="array_unidades">
+        <item value="ud/s." />
+        <item value="l" />
+        <item value="kg" />
+        <item value="ml" />
+        <item value="g" />
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="seleccione_lista_a_compartir">Seleccione lista a compartir</string>
+    <string name="enviar_sms">Enviar SMS</string>
+    <string name="programar_sms">Programar envío</string>
+    <string name="programar">Programar</string>
+    <string name="dd_mm_aa">dd/mm/aaaa</string>
+    <string name="hh_mm">hh:mm</string>
+    <string name="fecha">Fecha:</string>
+    <string name="hora">Hora:</string>
+    <string name="quieres_programar_el_envio">¿Quieres programar el envío?</string>
+    <string name="foto_de_contacto">foto de contacto</string>
+    <string name="nombre_contacto">Nombre Contacto</string>
+    <string name="telefono">Telefono</string>
+
+</resources>
