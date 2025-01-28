@@ -1,0 +1,23 @@
+@startuml
+class edu.pmdm.listascompra.ui.crear_producto.CrearProductoViewModel {
+}
+class edu.pmdm.listascompra.ui.crear_producto.CrearProductoFragment {
+- CrearProductoViewModel viewModel
+- FragmentCrearProductoBinding binding
+- Bitmap imagenSeleccionada
+- ActivityResultLauncher<Intent> eleccionImagen
+- RepoListasCompras repo
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onViewCreated(View,Bundle)
+- void guardarProducto(View)
+- void seleccionarImagen()
+- void resetearCampos()
++ void onDestroyView()
+}
+
+
+
+
+androidx.lifecycle.ViewModel <|-- edu.pmdm.listascompra.ui.crear_producto.CrearProductoViewModel
+androidx.fragment.app.Fragment <|-- edu.pmdm.listascompra.ui.crear_producto.CrearProductoFragment
+@enduml
